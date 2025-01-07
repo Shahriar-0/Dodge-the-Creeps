@@ -7,13 +7,18 @@ func game_over():
 	$ScoreTimer.stop()
 	$EnemyTimer.stop()
 	$HUD.show_game_over()
+	$Music.stop()
+	$DeathSound.play()
+	
 
 func new_game():
+	get_tree().call_group("Enemies", "queue_free")
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	$Music.play()
 
 func _on_start_timer_timeout():
 	$EnemyTimer.start()
