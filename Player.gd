@@ -3,6 +3,8 @@ extends Area2D
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
+signal player_hit
+
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
@@ -42,5 +44,5 @@ func _process(delta):
 
 func _on_body_entered(_body):
 	hide()
-	SignalBus.player_hit.emit()
+	player_hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
